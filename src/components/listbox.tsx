@@ -1,25 +1,35 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-
-type objOption = {
-  name: string;
-};
+import { Employee } from "../types";
 
 type Props = {
-  optionList: objOption[];
-  name: string;
+  optionList: Employee[];
+  placeholder: string;
+  setEmployeeIdSelected: React.Dispatch<React.SetStateAction<number>>
 };
 
 export function ListboxSelect(props: Props) {
-  const { optionList, name } = props;
-  const [selected, setSelected] = useState<objOption>({ name: "Seleccione un empleado" });
+  const { optionList, placeholder, setEmployeeIdSelected } = props;
+  const [selected, setSelected] = useState({} as Employee);
+
+  const onChange =  (selection: Employee) => {
+    setSelected(selection);
+    setEmployeeIdSelected(selection.id);
+  }
 
   return (
-    <Listbox name={name} value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={onChange}>
       <div className="relative mt-1">
-        <Listbox.Button  className="relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-gray-400 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-          <span className="block text-gray-500 truncate">{selected.name}</span>
+        <Listbox.Button
+          className="relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-gray-400 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:ring-transparent"
+        >
+          {selected.name ? (
+            <span className="block text-gray-500 truncate">{selected.name}</span>
+          ) : (
+            <span className="block text-gray-500 truncate text-opacity-70"> {placeholder}</span>
+          )}
         </Listbox.Button>
+
         <Transition
           as={Fragment}
           leave="transition ease-in duration-100"
