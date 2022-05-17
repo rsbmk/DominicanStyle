@@ -1,6 +1,6 @@
 import { Employee } from "../types";
 
-const BASE_URI = import.meta.env.VITE_BASE_URI;
+const BASE_URI = import.meta.env.VITE_BASE_API_URL;
 
 export function useEmployee() {
   async function getEmployees(): Promise<Employee[]> {
