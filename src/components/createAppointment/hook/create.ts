@@ -43,8 +43,17 @@ export function useCreateAppointment({
   async function handleCreateAppointmentSubmit(evt: React.FormEvent) {
     evt.preventDefault();
 
-    if (employeeIdSelected === 0 || serviceIdSelected === 0) {
-      setSomeError({ message: "Seleccione un empleado", nameInput: "employeeID" });
+    if (employeeIdSelected === 0) {
+      setSomeError({ message: "Seleccione un empleado", nameInput: "employeeId" });
+
+      window.setTimeout(() => {
+        setSomeError({ message: "", nameInput: "" });
+      }, 3000);
+      return;
+    }
+
+    if (serviceIdSelected === 0) {
+      setSomeError({ message: "Seleccione un servicio", nameInput: "serviceId" });
 
       window.setTimeout(() => {
         setSomeError({ message: "", nameInput: "" });

@@ -15,7 +15,7 @@ type Props = {
   };
 };
 
-export default function CreateAppointmentModla({ modalProps }: Props) {
+export default function CreateAppointmentModal({ modalProps }: Props) {
   const { isOpen, setIsOpen } = modalProps;
   const [employeeList, setEmployeeList] = useState<Employee[]>([]);
   const [serciveList, setServiceList] = useState<Service[]>([]);

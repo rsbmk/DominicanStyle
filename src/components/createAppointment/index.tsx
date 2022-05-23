@@ -8,7 +8,11 @@ export function CreateAppointment() {
 
   return (
     <>
-      <button onClick={() => setIsOpen(true)} className="font-medium button">
+      <button
+        aria-label="create appointment"
+        onClick={() => setIsOpen(true)}
+        className="font-medium button"
+      >
         Agendar cita
         <CrossPlusIcon width={16} height={16} />
       </button>

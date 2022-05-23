@@ -18,6 +18,7 @@ export default function Home() {
         <SocialMedia />
         <p className="italic text-gray-700">Las mejores manos profecionales</p>
         <a
+          aria-label="link a google maps"
           href="https://g.page/DominicanStyle?share"
           className="flex gap-2 font-medium text-blue-500"
           target="_blank"
