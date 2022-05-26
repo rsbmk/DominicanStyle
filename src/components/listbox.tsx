@@ -5,11 +5,12 @@ import { Employee, Service } from "../types";
 type Props = {
   optionList: Employee[] | Service[];
   placeholder: string;
+  hasError: boolean;
   setIdSelected: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export function ListboxSelect(props: Props) {
-  const { optionList, placeholder, setIdSelected } = props;
+  const { optionList, placeholder, hasError, setIdSelected } = props;
   const [selected, setSelected] = useState({} as Employee | Service);
 
   const onChange = (selection: Employee) => {
@@ -20,7 +21,13 @@ export function ListboxSelect(props: Props) {
   return (
     <Listbox value={selected} onChange={onChange}>
       <div className="relative mt-1">
-        <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-gray-400 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:ring-transparent">
+        <Listbox.Button
+          className={`relative w-full py-2 pl-3 pr-10 text-left border-2 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:ring-transparent ${
+            hasError
+              ? "border-red-500 bg-red-50 bg-opacity-50"
+              : "border-gray-400 bg-slate-100 bg-opacity-50"
+          }`}
+        >
           {selected.name ? (
             <span className="block text-gray-500 truncate">{selected.name}</span>
           ) : (

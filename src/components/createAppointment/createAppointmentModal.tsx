@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 
-import { Employee, Service } from "../../types";
+import { Employee, Notifications, Service } from "../../types";
 import { ListboxSelect } from "../listbox";
 import { useCreateAppointment } from "./hook/create";
 import { useEmployee } from "../../hooks/employees";
@@ -11,12 +11,13 @@ const LoadingIcon = lazy(() => import("../../icons/loading"));
 type Props = {
   modalProps: {
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    setNotification: React.Dispatch<React.SetStateAction<Notifications>>;
     isOpen: boolean;
   };
 };
 
 export default function CreateAppointmentModal({ modalProps }: Props) {
-  const { isOpen, setIsOpen } = modalProps;
+  const { isOpen, setIsOpen, setNotification } = modalProps;
   const [employeeList, setEmployeeList] = useState<Employee[]>([]);
   const [serciveList, setServiceList] = useState<Service[]>([]);
   const { getEmployees } = useEmployee();
@@ -52,7 +53,7 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
     <Modal isOpen={isOpen} onClose={closeModal}>
       <h2 className="mb-4 text-lg font-medium text-blue-500">Agenda tu cita</h2>
       <form
-        onSubmit={handleCreateAppointmentSubmit}
+        onSubmit={(evt) => handleCreateAppointmentSubmit(evt, setNotification)}
         className="flex flex-col gap-3 overflow-y-scroll "
       >
         {INPUTS_LIST.map((input) => {
@@ -66,7 +67,11 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
                 autoComplete="off"
                 required={required}
                 minLength={name === "telephone" ? 10 : undefined}
-                className="w-full p-2 text-gray-500 border-2 border-gray-400 border-opacity-50 rounded-xl focus:outline-none"
+                className={`w-full p-2 text-gray-500 placeholder-gray-400 border-2 border-opacity-50 rounded-xl focus:outline-none ${
+                  someError.nameInput === name
+                    ? "border-red-500 bg-red-50 bg-opacity-50"
+                    : "border-gray-400 bg-slate-100 bg-opacity-50"
+                }`}
               />
               {someError.nameInput === name && <ErrorMessageField message={someError.message} />}
             </label>
@@ -75,6 +80,7 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
 
         <label key="employeeId">
           <ListboxSelect
+            hasError={someError.nameInput === "employeeId"}
             optionList={employeeList}
             placeholder="Seleccione un empleado"
             setIdSelected={setEmployeeIdSelected}
@@ -86,6 +92,7 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
 
         <label key="serviceId">
           <ListboxSelect
+            hasError={someError.nameInput === "serviceId"}
             optionList={serciveList}
             placeholder="Servicio a realizar"
             setIdSelected={setServiceIdSelected}
