@@ -1,13 +1,23 @@
 import { lazy, Suspense, useState } from "react";
 import { CrossPlusIcon } from "../../icons/cross";
+import { Notifications as NotificationsTypes } from "../../types";
 
 const CreateAppointmentModla = lazy(() => import("./createAppointmentModal"));
+const Notifications = lazy(() => import("../modals/notifications"));
 
 export function CreateAppointment() {
   const [isOpen, setIsOpen] = useState(false);
+  const [notification, setNotification] = useState<NotificationsTypes>({
+    show: false,
+    message: "",
+    type: "",
+  });
 
   return (
     <>
+      <Suspense fallback={null}>
+        <Notifications notification={notification} setShow={setNotification} />
+      </Suspense>
       <button
         aria-label="create appointment"
         onClick={() => setIsOpen(true)}
@@ -18,7 +28,9 @@ export function CreateAppointment() {
       </button>
 
       <Suspense fallback={null}>
-        {isOpen ? <CreateAppointmentModla modalProps={{ isOpen, setIsOpen }} /> : null}
+        {isOpen ? (
+          <CreateAppointmentModla modalProps={{ isOpen, setIsOpen, setNotification }} />
+        ) : null}
       </Suspense>
     </>
   );

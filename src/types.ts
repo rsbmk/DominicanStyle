@@ -40,3 +40,10 @@ export type Appointment = {
   serviceId: number;
   employeeId: number;
 };
+export type TypesNotification = "success" | "error" | "info" | "";
+
+export type Notifications = {
+  show: boolean;
+  message: string;
+  type: TypesNotification;
+};
