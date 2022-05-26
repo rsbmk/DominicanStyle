@@ -1,20 +1,16 @@
-import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
-const WORKING_HOURS = 24;
+const HOURS_OF_WORK = 24;
 
 export function TimelimeHoursList() {
   const [hourOfDayList, setHourOfDayList] = useState<string[]>([]);
 
   useEffect(() => {
-    for (let index = 0; index < WORKING_HOURS; index++) {
-      setHourOfDayList((preState) => [
-        ...preState,
-        DateTime.now()
-          .set({ hour: 0 + index, minute: 0 })
-          .toFormat("HH"),
-      ]);
-    }
+    const hourOfDayList = [...Array(HOURS_OF_WORK).keys()].map((hour) => {
+      return dayjs().hour(hour).minute(0).format("HH:mm");
+    });
+    setHourOfDayList(hourOfDayList);
 
     return () => setHourOfDayList([]);
   }, []);
@@ -22,7 +18,7 @@ export function TimelimeHoursList() {
   return (
     <ul className="space-y-2">
       {hourOfDayList.map((hour, i) => {
-        const isNow = DateTime.now().toFormat("HH") === hour;
+        const isNow = dayjs().minute(0).format("HH:mm") === hour;
         return (
           <li
             key={i}
@@ -30,7 +26,7 @@ export function TimelimeHoursList() {
               isNow ? "text-red-500 font-medium" : "text-gray-600"
             }`}
           >
-            {hour}:00
+            {hour}
             <p
               className={`w-full border-b-2 border-opacity-50 ${
                 isNow ? "border-red-500" : "border-gray-400"

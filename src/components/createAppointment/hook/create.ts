@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Appointment, Notifications } from "../../../types";
-import { DateTime } from "luxon";
+import dayjs from "dayjs";
 
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
@@ -56,7 +56,7 @@ export function useCreateAppointment({
     const fromData = new FormData(evt.currentTarget as HTMLFormElement);
 
     const shedule = new Date(fromData.get("shedule") as string);
-    const isValidDateShedule = DateTime.fromJSDate(shedule).isValid;
+    const isValidDateShedule = dayjs(shedule, {}, true).isValid();
 
     if (!isValidDateShedule)
       return printError({ message: "La fecha ingresada no es válida", nameInput: "shedule" });
