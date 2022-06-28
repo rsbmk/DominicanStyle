@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
 import { Employee, Service } from "@/types";
@@ -20,9 +20,11 @@ export function ListboxSelect(props: Props) {
   };
 
   return (
-    <Listbox value={selected} onChange={onChange}>
+    <Listbox as="section" value={selected} onChange={onChange}>
       <div className="relative mt-1">
         <Listbox.Button
+          as="button"
+          aria-label="select employe"
           className={`relative w-full py-2 pl-3 pr-10 text-left border-2 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:ring-transparent ${
             hasError
               ? "border-red-500 bg-red-50 bg-opacity-50"
@@ -37,15 +39,19 @@ export function ListboxSelect(props: Props) {
         </Listbox.Button>
 
         <Transition
-          as={Fragment}
+          as="div"
           leave="transition ease-in duration-100"
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg focus:outline-none max-h-60 ring-1 ring-black ring-opacity-5 sm:text-sm">
+          <Listbox.Options
+            as="ul"
+            className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg focus:outline-none max-h-60 ring-1 ring-black ring-opacity-5 sm:text-sm"
+          >
             {optionList.length > 0 &&
               optionList.map((option) => (
                 <Listbox.Option
+                  as="li"
                   key={option.id}
                   className={({ active }) =>
                     `cursor-default select-none py-2 pl-10 pr-4 hover:bg-gray-100 ${
@@ -57,6 +63,7 @@ export function ListboxSelect(props: Props) {
                   {({ selected }) => (
                     <>
                       <span
+                        title={`Empleado ${option.name}`}
                         className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                       >
                         {option.name}
@@ -68,6 +75,7 @@ export function ListboxSelect(props: Props) {
 
             {optionList.length === 0 && (
               <Listbox.Option
+                as="li"
                 value=""
                 className={({ active }) =>
                   `cursor-default select-none py-2 pl-10 pr-4 hover:bg-gray-100 ${

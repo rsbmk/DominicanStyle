@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 
 import { Employee, Notifications, Service } from "@/types";
-import { ListboxSelect } from "@/components/listbox";
+import { ListboxSelect } from "@/components/listbox/listbox";
 import { useCreateAppointment } from "@/components/createAppointment/hook/create";
 import { useEmployee } from "@/hooks/employees";
 import Modal from "@/components/modal";
