@@ -1,4 +1,4 @@
-import {rest, RestRequest, ResponseComposition, RestContext} from "msw"
+import { rest, RestRequest, ResponseComposition, RestContext } from "msw";
 import { Appointment } from "../types";
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
@@ -6,12 +6,10 @@ const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 // ResponseComposition<DefaultRequestBody>
 // RestContext
 
-export const  handlers = [
-  rest.post(`${BASE_URL}/v1/appointment`, handleCreateAppointment),
-]
+export const handlers = [rest.post(`${BASE_URL}/v1/appointment`, handleCreateAppointment)];
 
-function handleCreateAppointment (req: RestRequest,res:ResponseComposition, ctx:RestContext) {
-  const { employeeId, serviceId, shedule, telephone, name } = req.body as Appointment;
+function handleCreateAppointment(req: RestRequest, res: ResponseComposition, ctx: RestContext) {
+  const { employeeId, serviceId, schedule, telephone, name } = req.body as Appointment;
 
   return res(
     ctx.delay(0),
@@ -21,11 +19,11 @@ function handleCreateAppointment (req: RestRequest,res:ResponseComposition, ctx:
         id: 1,
         employeeId,
         serviceId,
-        shedule,
+        schedule,
         telephone,
         name,
         createAt: new Date().toISOString(),
-      }
+      },
     })
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { Employee } from "../types";
+import { Employee } from "@/types";
 
 const BASE_URI = import.meta.env.VITE_BASE_API_URL;
 

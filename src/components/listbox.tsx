@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
-import { Employee, Service } from "../types";
+
+import { Employee, Service } from "@/types";
 
 type Props = {
   optionList: Employee[] | Service[];

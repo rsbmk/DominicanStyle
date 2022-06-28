@@ -36,7 +36,7 @@ export type Service = {
 export type Appointment = {
   name: string;
   telephone: string;
-  shedule: string;
+  schedule: string;
   serviceId: number;
   employeeId: number;
 };

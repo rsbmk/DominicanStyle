@@ -1,7 +1,7 @@
 import React from "react";
 
-import { CreateAppointment } from "../components/createAppointment";
-import { TimelimeHoursList } from "../components/timelineHoursList";
+import { CreateAppointment } from "@/components/createAppointment";
+import { TimelimeHoursList } from "@/components/timelineSchedule/timelineHoursList";
 
 export default function Appointment() {
   return (

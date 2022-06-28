@@ -1,7 +1,8 @@
 import { Link } from "wouter";
-import { SocialMedia } from "../components/socialMedia";
-import { DateIcon } from "../icons/date";
-import { LocationIcon } from "../icons/location";
+
+import { DateIcon } from "@/icons/date";
+import { LocationIcon } from "@/icons/location";
+import { SocialMedia } from "@/components/socialMedia";
 
 export default function Home() {
   return (

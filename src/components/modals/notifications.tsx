@@ -1,7 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useEffect } from "react";
 import { Transition } from "@headlessui/react";
-import { Notifications as NotiTypes, TypesNotification } from "../../types";
+import { Notifications as NotiTypes, TypesNotification } from "@/types";
 
 type NotificationsProps = {
   setShow: React.Dispatch<React.SetStateAction<NotiTypes>>;

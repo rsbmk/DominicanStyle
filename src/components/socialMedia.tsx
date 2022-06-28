@@ -1,4 +1,4 @@
-import { FacebookIcon, InstagramIcon } from "../icons/socials";
+import { FacebookIcon, InstagramIcon } from "@/icons/socials";
 
 export function SocialMedia() {
   return (

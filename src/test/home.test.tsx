@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import Home from "../pages/home.jsx";
+import Home from "@/pages/home.jsx";
 
 describe.skip("Home", () => {
   //  aria-label="Link a instagram"

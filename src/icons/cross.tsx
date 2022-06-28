@@ -1,4 +1,4 @@
-import { props } from "./interfaceIcons";
+import { props } from "@/icons/interfaceIcons";
 
 export function CrossPlusIcon(props: props) {
   return (

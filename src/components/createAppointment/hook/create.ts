@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Appointment, Notifications } from "../../../types";
 import dayjs from "dayjs";
+
+import { Appointment, Notifications } from "@/types";
 
 const BASE_URL = import.meta.env.VITE_BASE_API_URL;
 
@@ -36,7 +37,7 @@ export function useCreateAppointment({
     {
       placeholder: "Hora de atención deseada",
       type: "datetime-local",
-      name: "shedule",
+      name: "schedule",
       required: true,
     },
   ];
@@ -55,18 +56,18 @@ export function useCreateAppointment({
 
     const fromData = new FormData(evt.currentTarget as HTMLFormElement);
 
-    const shedule = new Date(fromData.get("shedule") as string);
+    const shedule = new Date(fromData.get("schedule") as string);
     const isValidDateShedule = dayjs(shedule, {}, true).isValid();
 
     if (!isValidDateShedule)
-      return printError({ message: "La fecha ingresada no es válida", nameInput: "shedule" });
+      return printError({ message: "La fecha ingresada no es válida", nameInput: "schedule" });
 
     setLoading(true);
 
     const appointmentData: Appointment = {
       name: fromData.get("name") as string,
       telephone: fromData.get("telephone") as string,
-      shedule: fromData.get("shedule") as string,
+      schedule: shedule.toJSON(),
       serviceId: serviceIdSelected,
       employeeId: employeeIdSelected,
     };
@@ -90,10 +91,10 @@ export function useCreateAppointment({
         return;
       }
 
-      // provar los errores y mostrarlos en el modal
-      setLoading(false);
       const error = await response.json();
       const { message, nameInput, error: errorMessage } = error;
+
+      setLoading(false);
       printError({ message, nameInput });
       setNotification({ message: errorMessage, show: true, type: "error" });
     } catch (error) {

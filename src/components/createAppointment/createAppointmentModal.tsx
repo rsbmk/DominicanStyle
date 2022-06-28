@@ -1,12 +1,12 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 
-import { Employee, Notifications, Service } from "../../types";
-import { ListboxSelect } from "../listbox";
-import { useCreateAppointment } from "./hook/create";
-import { useEmployee } from "../../hooks/employees";
-import Modal from "../modal";
+import { Employee, Notifications, Service } from "@/types";
+import { ListboxSelect } from "@/components/listbox";
+import { useCreateAppointment } from "@/components/createAppointment/hook/create";
+import { useEmployee } from "@/hooks/employees";
+import Modal from "@/components/modal";
 
-const LoadingIcon = lazy(() => import("../../icons/loading"));
+const LoadingIcon = lazy(() => import("@/icons/loading"));
 
 type Props = {
   modalProps: {

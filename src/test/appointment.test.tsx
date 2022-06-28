@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
-import Appointment from "../pages/appointment";
+
+import Appointment from "@/pages/appointment";
 
 describe.skip("appointment", () => {
   it("render appointment", () => {
