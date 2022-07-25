@@ -49,13 +49,17 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
     setServiceList(serviceList);
   }, [employeeList, employeeIdSelected]);
 
+  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(evt.currentTarget);
+    handleCreateAppointmentSubmit(formData, setNotification);
+  };
+
   return (
     <Modal isOpen={isOpen} onClose={closeModal}>
-      <h2 className="mb-4 text-lg font-medium text-blue-500">Agenda tu cita</h2>
-      <form
-        onSubmit={(evt) => handleCreateAppointmentSubmit(evt, setNotification)}
-        className="flex flex-col gap-3 overflow-y-scroll "
-      >
+      <h2 className="mb-4 text-lg font-medium text-blue-500" aria-label="title of modal">
+        Agenda tu cita
+      </h2>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 overflow-y-scroll ">
         {INPUTS_LIST.map((input) => {
           const { placeholder, type, name, required } = input;
           return (
@@ -111,7 +115,7 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
           >
             Cerrar
           </button>
-          <button disabled={loading} type="submit" className="button">
+          <button disabled={loading} type="submit" className="button" aria-label="crear cita">
             <Suspense fallback={null}>{loading ? <LoadingIcon /> : "Agendar cita"}</Suspense>
           </button>
         </div>
@@ -121,5 +125,9 @@ export default function CreateAppointmentModal({ modalProps }: Props) {
 }
 
 function ErrorMessageField({ message }: { message: string }) {
-  return <p className="text-sm text-red-400">{message}</p>;
+  return (
+    <p aria-label="input error message" className="text-sm text-red-400">
+      {message}
+    </p>
+  );
 }

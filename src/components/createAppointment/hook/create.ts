@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import dayjs from "dayjs";
+import fetch from "cross-fetch";
 
 import { Appointment, Notifications } from "@/types";
 
@@ -42,21 +43,34 @@ export function useCreateAppointment({
     },
   ];
 
-  async function handleCreateAppointmentSubmit(
-    evt: React.FormEvent,
+  const validateSelections = ({
+    employeeIdSelected,
+    serviceIdSelected,
+  }: {
+    employeeIdSelected: number;
+    serviceIdSelected: number;
+  }) => {
+    return new Promise((resolve, reject) => {
+      if (employeeIdSelected === 0)
+        reject({ message: "Seleccione un empleado", nameInput: "employeeId" });
+
+      if (serviceIdSelected === 0)
+        reject({ message: "Seleccione un servicio", nameInput: "serviceId" });
+
+      resolve({ message: "", nameInput: "" });
+    });
+  };
+
+  const handleCreateAppointmentSubmit = useCallback(async function (
+    formData: FormData,
     setNotification: React.Dispatch<React.SetStateAction<Notifications>>
   ) {
-    evt.preventDefault();
+    validateSelections({ employeeIdSelected, serviceIdSelected }).catch((error) => {
+      printError(error);
+      return true;
+    });
 
-    if (employeeIdSelected === 0)
-      return printError({ message: "Seleccione un empleado", nameInput: "employeeId" });
-
-    if (serviceIdSelected === 0)
-      return printError({ message: "Seleccione un servicio", nameInput: "serviceId" });
-
-    const fromData = new FormData(evt.currentTarget as HTMLFormElement);
-
-    const shedule = new Date(fromData.get("schedule") as string);
+    const shedule = new Date(formData.get("schedule") as string);
     const isValidDateShedule = dayjs(shedule, {}, true).isValid();
 
     if (!isValidDateShedule)
@@ -65,8 +79,8 @@ export function useCreateAppointment({
     setLoading(true);
 
     const appointmentData: Appointment = {
-      name: fromData.get("name") as string,
-      telephone: fromData.get("telephone") as string,
+      name: formData.get("name") as string,
+      telephone: formData.get("telephone") as string,
       schedule: shedule.toJSON(),
       serviceId: serviceIdSelected,
       employeeId: employeeIdSelected,
@@ -81,6 +95,8 @@ export function useCreateAppointment({
         },
         body: JSON.stringify(appointmentData),
       });
+
+      console.log("response", response);
 
       if (response.ok) {
         const appointment = await response.json();
@@ -97,10 +113,12 @@ export function useCreateAppointment({
       setLoading(false);
       printError({ message, nameInput });
       setNotification({ message: errorMessage, show: true, type: "error" });
+      closeModal();
     } catch (error) {
       console.error("Error", error);
     }
-  }
+  },
+  []);
 
   function printError({ message = "", nameInput = "" }) {
     setSomeError({ message, nameInput });

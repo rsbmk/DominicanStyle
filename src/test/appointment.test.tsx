@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react";
 
 import Appointment from "@/pages/appointment";
 
-describe.skip("appointment", () => {
+describe("appointment", () => {
   it("render appointment", () => {
     const { getByText, getByLabelText } = render(<Appointment />);
     expect(getByText("Citas del día")).toBeTruthy();

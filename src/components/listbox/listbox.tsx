@@ -14,7 +14,7 @@ export function ListboxSelect(props: Props) {
   const { optionList, placeholder, hasError, setIdSelected } = props;
   const [selected, setSelected] = useState({} as Employee | Service);
 
-  const onChange = (selection: Employee) => {
+  const onChange = (selection: Employee | Service) => {
     setSelected(selection);
     setIdSelected(selection.id);
   };
@@ -24,7 +24,7 @@ export function ListboxSelect(props: Props) {
       <div className="relative mt-1">
         <Listbox.Button
           as="button"
-          aria-label="select employe"
+          aria-label="select"
           className={`relative w-full py-2 pl-3 pr-10 text-left border-2 border-opacity-50 cursor-default rounded-xl focus:outline-none focus-visible:ring-transparent ${
             hasError
               ? "border-red-500 bg-red-50 bg-opacity-50"
@@ -34,7 +34,7 @@ export function ListboxSelect(props: Props) {
           {selected.name ? (
             <span className="block text-gray-500 truncate">{selected.name}</span>
           ) : (
-            <span className="block text-gray-500 truncate text-opacity-70"> {placeholder}</span>
+            <span className="block text-gray-500 truncate text-opacity-70">{placeholder}</span>
           )}
         </Listbox.Button>
 
@@ -45,6 +45,7 @@ export function ListboxSelect(props: Props) {
           leaveTo="opacity-0"
         >
           <Listbox.Options
+            aria-label="list of employees"
             as="ul"
             className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg focus:outline-none max-h-60 ring-1 ring-black ring-opacity-5 sm:text-sm"
           >
@@ -52,6 +53,7 @@ export function ListboxSelect(props: Props) {
               optionList.map((option) => (
                 <Listbox.Option
                   as="li"
+                  title={`option ${option.name}`}
                   key={option.id}
                   className={({ active }) =>
                     `cursor-default select-none py-2 pl-10 pr-4 hover:bg-gray-100 ${
@@ -63,7 +65,6 @@ export function ListboxSelect(props: Props) {
                   {({ selected }) => (
                     <>
                       <span
-                        title={`Empleado ${option.name}`}
                         className={`block truncate ${selected ? "font-medium" : "font-normal"}`}
                       >
                         {option.name}

@@ -1,4 +1,5 @@
 import { Employee } from "@/types";
+import fetch from "cross-fetch";
 
 const BASE_URI = import.meta.env.VITE_BASE_API_URL;
 

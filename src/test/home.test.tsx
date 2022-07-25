@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { render, fireEvent } from "@testing-library/react";
 import Home from "@/pages/home.jsx";
 
-describe.skip("Home", () => {
+describe("Home", () => {
   //  aria-label="Link a instagram"
   it("renderiza la home", () => {
     const { getByText, getByLabelText } = render(<Home />);
