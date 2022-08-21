@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 
 import { DateIcon } from "@/icons/date";
-import { DeteSelectIlutration } from "@/icons/DateSelectIlutration";
+import { DetePickerIlutration } from "@/icons/DateSelectIlutration";
 import { LocationIcon } from "@/icons/location";
 import { SocialMedia } from "@/components/socialMedia";
 
@@ -52,7 +52,7 @@ export default function Home() {
           <DateIcon width={30} />
         </Link>
         <div className="w-full">
-          <DeteSelectIlutration />
+          <DetePickerIlutration />
         </div>
       </main>
       <footer className="flex justify-center w-full mt-8">
