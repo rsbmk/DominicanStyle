@@ -1,49 +1,157 @@
-export type Employee = {
-  address: string;
-  createdAt: string;
-  id: number;
-  name: string;
-  phone: string;
-  teamId: number;
-  team: Team;
-  service: ServiceWithService[];
-};
 
-export type Team = {
-  createAt: string;
-  id: number;
-  name: string;
-};
+/**
+ * Model Company
+ * 
+ */
+export type Company = {
+  id: number
+  name: string
+  createAt: Date | null
+}
 
-export type ServiceWithService = {
-  service: {
-    createAt: string;
-    description: string;
-    id: number;
-    name: string;
-    price: number;
-  };
-};
-
-export type Service = {
-  createAt: string;
-  description: string;
-  id: number;
-  name: string;
-  price: number;
-};
-
+/**
+ * Model Appointment
+ * 
+ */
 export type Appointment = {
-  name: string;
-  telephone: string;
-  schedule: string;
-  serviceId: number;
-  employeeId: number;
-};
-export type TypesNotification = "success" | "error" | "info" | "";
+  id: number
+  createAt: Date | null
+  appointmentDate: Date
+  state: Appointment_state
+  client_id: string
+  employee_id: number
+}
 
-export type Notifications = {
-  show: boolean;
-  message: string;
-  type: TypesNotification;
-};
+/**
+ * Model Client
+ * 
+ */
+export type Client = {
+  cedula: string
+  name: string
+  last_name: string
+  telephone: string | null
+  createAt: Date | null
+}
+
+/**
+ * Model Employee
+ * 
+ */
+export type Employee = {
+  id: number
+  name: string
+  last_name: string
+  telephone: string | null
+  createAt: Date | null
+  address: string | null
+  company_id: number
+}
+
+/**
+ * Model Employee_Team
+ * 
+ */
+export type Employee_Team = {
+  id: number
+  team_id: number
+  employee_id: number
+}
+
+/**
+ * Model Service
+ * 
+ */
+export type Service = {
+  id: number
+  name: string
+  createAt: Date | null
+  team_id: number
+  price: number
+}
+
+/**
+ * Model Service_Appointment
+ * 
+ */
+export type Service_Appointment = {
+  id: number
+  service_id: number
+  appointment_id: number
+}
+
+/**
+ * Model Team
+ * 
+ */
+export type Team = {
+  id: number
+  name: string
+  createAt: Date | null
+}
+
+export type Appointment_state = 'pending' | 'confirmed' | 'process' | 'close' | 'cancelled'
+
+// export type CreateAppointmentBody = {
+//   appointment: Appointment;
+//   serviceIds: number[];
+// }
+
+/**
+ * Theses interfaces are used to define the return the services
+ */
+
+export interface getEmployeeType {
+ Appointment:   Appointment[];
+ Company:       Company;
+ Employee_Team: Employee_Team[];
+ address:       null;
+ company_id:    number;
+ createAt:      Date;
+ id:            number;
+ last_name:     string;
+ name:          string;
+ telephone:     string;
+}
+
+export interface getEmployeeWithServicesType {
+ Team:        TeamServices;
+ employee_id: number;
+ id:          number;
+ team_id:     number;
+}
+
+interface TeamServices {
+ Service:  Service[];
+ createAt: Date;
+ id:       number;
+ name:     string;
+}
+
+export interface CreateAppointmentTypes {
+  appointment: {
+    appointmentDate: string;
+    client_id: string;
+    employee_id: number;
+  };
+  serviceIds: number[];
+}
+
+export interface AppointmentCreateResponse {
+ Client:              Client;
+ Employee:            Employee;
+ Service_Appointment: ServiceAppointment[];
+ appointmentDate:     Date;
+ client_id:           string;
+ createAt:            Date;
+ employee_id:         number;
+ id:                  number;
+ state:               string;
+}
+
+export interface ServiceAppointment {
+ Service:        Service;
+ appointment_id: number;
+ id:             number;
+ service_id:     number;
+}
