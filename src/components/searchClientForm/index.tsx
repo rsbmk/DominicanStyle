@@ -1,15 +1,13 @@
-import { useClient } from "@/hooks/client";
-import { CalendarIlustraton } from "@/icons/DateSelectIlutration";
-import LoadingIcon from "@/icons/loading";
-import { SearchIcon } from "@/icons/searchIcon";
-import { Client } from "@/types";
-import { useState } from "react";
 import { Link } from "wouter";
+import { useCallback, useState } from "react";
 
-const resetErrors = {
-  input: "",
-  message: "",
-};
+import { CalendarIlustraton } from "@/icons/DateSelectIlutration";
+import { Client } from "@/types";
+import { ErrorMessage } from "@/components/errorMessage";
+import { resetErrors } from "@/constants";
+import { searchClientData } from "@/services/client";
+import { SearchIcon } from "@/icons/searchIcon";
+import LoadingIcon from "@/icons/loading";
 
 export function SearchClientForm({
   setClientData = () => null,
@@ -19,32 +17,33 @@ export function SearchClientForm({
   const [showErrors, setShowErrors] = useState(resetErrors);
   const [loadingClientData, setLoadingClientData] = useState(false);
 
-  const { searchClientData } = useClient();
-
-  const handleSearchClient = (evt: React.FormEvent<HTMLFormElement>) => {
+  const handleSearchClient = useCallback((evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     const testCI = /^[0-9]{10}$/;
     const clientId = evt.currentTarget.elements.namedItem("cedula") as HTMLInputElement | null;
+
     if (clientId === null || !testCI.test(clientId.value)) {
       setShowErrors({ input: "cedula", message: "Cedula no valida" });
       return;
     }
-    setShowErrors(resetErrors);
 
+    setShowErrors(resetErrors);
     setLoadingClientData(true);
+
     searchClientData({ clientId: clientId.value })
       .then((client) => {
         setClientData(client);
       })
       .catch((err) => {
         setShowErrors({
-          input: "cedula",
-          message: "Ingresó mal su cédula o no ha registrado sus datos",
+          input: err.nameInput,
+          message: err.message,
         });
         console.error({ err });
       })
       .finally(() => setLoadingClientData(false));
-  };
+  }, []);
 
   return (
     <>
@@ -73,7 +72,9 @@ export function SearchClientForm({
         </button>
       </form>
       {showErrors.input === "cedula" && (
-        <p className="pl-4 mt-2 text-sm italic text-red-400">{showErrors.message}</p>
+        <div className="pl-4">
+          <ErrorMessage message={showErrors.message} />
+        </div>
       )}
       <Link
         href="/client/register"

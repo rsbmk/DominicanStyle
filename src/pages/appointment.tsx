@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-import { Client } from "@/types";
+import { AppointmentCreateResponse, Client } from "@/types";
+import { CreateAppointmentForm } from "@/components/createAppointment";
+import { searchClientData } from "@/services/client";
 import { SearchClientForm } from "@/components/searchClientForm";
+import LoadingIcon from "@/icons/loading";
+import { AppointmentInformation } from "@/components/createAppointment/component/infomation";
+
+export const titleAppointmentContex = createContext({});
 
 export default function Appointment() {
-  const [lastClientId, setLastClientId] = useState(() => window.localStorage.getItem("cedula"));
   const [clientData, setClientData] = useState<Client | null>(null);
+  const [lastClientId, setLastClientId] = useState(() => window.localStorage.getItem("cedula"));
+  const [loadingClientData, setLoadingClientData] = useState(false);
+  const [appointmentData, setAppointmentData] = useState<AppointmentCreateResponse | null>(null);
 
   const handleGetClient = (client: Client) => {
     window.localStorage.setItem("cedula", client.cedula);
@@ -13,13 +21,40 @@ export default function Appointment() {
     setLastClientId(client.cedula);
   };
 
+  useEffect(() => {
+    if (lastClientId === null || clientData !== null) return;
+
+    setLoadingClientData(true);
+    searchClientData({ clientId: lastClientId })
+      .then(setClientData)
+      .catch((err) => console.error({ err }))
+      .finally(() => setLoadingClientData(false));
+  }, [lastClientId, clientData]);
+
   return (
     <main className="">
-      <h1 className="mt-8 text-3xl font-bold text-center text-primary-100">Agenda tu cita</h1>
-      {lastClientId === null && clientData === null ? (
+      <h1 className="mt-8 text-3xl font-bold text-center text-primary-100">{appointmentData === null ? "Agenda tu cita" : "Cita agendada"}</h1>
+      {lastClientId === null ? (
         <SearchClientForm setClientData={handleGetClient} />
       ) : (
-        <span>ya tienes al cliente identificado</span>
+        <>
+          {loadingClientData && clientData === null && (
+            <div className="flex items-end justify-center w-full h-10 text-primary-100">
+              <LoadingIcon stroke="#09f" opacity="opacity-70" />
+            </div>
+          )}
+
+          {appointmentData === null && clientData !== null && loadingClientData === false && (
+            <CreateAppointmentForm
+              clientData={clientData}
+              setAppointmentData={setAppointmentData}
+            />
+          )}
+
+          {appointmentData !== null && clientData !== null && (
+            <AppointmentInformation appointmentData={appointmentData} clientData={clientData} />
+          )}
+        </>
       )}
     </main>
   );
