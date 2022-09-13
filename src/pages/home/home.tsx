@@ -5,7 +5,7 @@ import { DetePickerIlutration } from "@/icons/DateSelectIlutration";
 import { LocationIcon } from "@/icons/location";
 import { SocialMedia } from "@/components/socialMedia";
 
-export default function Home() {
+export function Home() {
   return (
     <>
       <header className="w-full">
@@ -47,7 +47,7 @@ export default function Home() {
         </div>
       </header>
       <main className="grid gap-3 place-content-center">
-        <Link href="/appointment" className="font-medium button">
+        <Link href="/appointment" className="font-medium button" aria-label="link to create appointment">
           Agendar cita
           <DateIcon width={30} />
         </Link>
