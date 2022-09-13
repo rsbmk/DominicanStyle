@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, Switch } from "wouter";
 
 const Appointment = lazy(() => import("@/pages/appointment"));
-const Home = lazy(() => import("@/pages/home/"));
+const Home = lazy(() => import("@/pages/home"));
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
 
         {/* Client */}
         <Route path="/client/register">
-          <p>no he creado esta pagina</p>
+          <p> </p>
         </Route>
 
         {/* Employee */}

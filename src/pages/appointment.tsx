@@ -33,7 +33,7 @@ export default function Appointment() {
 
   return (
     <main className="">
-      <h1 className="mt-8 text-3xl font-bold text-center text-primary-100">{appointmentData === null ? "Agenda tu cita" : "Cita agendada"}</h1>
+      <h1 aria-label="title appointment" className="mt-8 text-3xl font-bold text-center text-primary-100">{appointmentData === null ? "Agenda tu cita" : "Cita agendada"}</h1>
       {lastClientId === null ? (
         <SearchClientForm setClientData={handleGetClient} />
       ) : (
