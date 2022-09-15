@@ -1,7 +1,7 @@
 import LoadingIcon from "@/icons/loading";
 import { AppointmentCreateResponse, Client } from "@/types";
-import { ErrorMessage } from "../errorMessage";
-import { AppointmentDateSelect } from "./component/appointmentDate";
+import { ErrorMessage } from "@/components/errorMessage";
+import { DateSelect } from "./component/DateSelect/DateSelect";
 import { EmployeeSelect } from "./component/employeeSelect";
 import { useAppointmentForm, inputsNames } from "./hook/appointmentForm";
 
@@ -37,7 +37,7 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
           onSubmit={handleCreateAppointment}
           className="grid gap-4 mx-3 mb-40 font-medium text-gray-600"
         >
-          <AppointmentDateSelect
+          <DateSelect
             inputHasError={showErrors.input}
             messageError={showErrors.message}
             name={inputsNames.date}
