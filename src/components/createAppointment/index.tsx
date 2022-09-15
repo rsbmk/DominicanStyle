@@ -1,8 +1,11 @@
+import { useEffect, useState } from "react";
+
 import LoadingIcon from "@/icons/loading";
-import { AppointmentCreateResponse, Client } from "@/types";
+import { AppointmentCreateResponse, Client, getEmployeeType } from "@/types";
 import { ErrorMessage } from "@/components/errorMessage";
-import { DateSelect } from "./component/DateSelect/DateSelect";
-import { EmployeeSelect } from "./component/employeeSelect";
+import { getEmployees } from "@/services/employees";
+import { DateSelect } from "@/components/createAppointment/component/DateSelect";
+import { EmployeeSelect } from "@/components/createAppointment/component/EmployeeSelect";
 import { useAppointmentForm, inputsNames } from "./hook/appointmentForm";
 
 type Props = {
@@ -11,6 +14,9 @@ type Props = {
 };
 
 export function CreateAppointmentForm({ clientData, setAppointmentData }: Props) {
+  const [employeeList, setEmployeeList] = useState<getEmployeeType[]>([]);
+  const [loadingEmployeeList, setLoadingEmployeeList] = useState(true);
+
   const {
     clearEmployeeWithServices,
     employeeWithServices,
@@ -21,6 +27,17 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
     loadingServicesData,
     showErrors,
   } = useAppointmentForm({ cedula: clientData.cedula, setAppointmentData });
+
+  useEffect(() => {
+    getEmployees()
+      .then((employees) => {
+        setEmployeeList(employees);
+      })
+      .catch((err) => {
+        console.error({ err });
+      })
+      .finally(() => setLoadingEmployeeList(false));
+  }, []);
 
   return (
     <section>
@@ -43,13 +60,16 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
             name={inputsNames.date}
           />
           <EmployeeSelect
+            labelTitle="Algún empleado de preferencia:"
+            loading={loadingEmployeeList}
+            optionsList={employeeList}
             inputHasError={showErrors.input}
             messageError={showErrors.message}
             name={inputsNames.employeeId}
-            clearEmployeeWithServices={clearEmployeeWithServices}
+            handleOnChange={clearEmployeeWithServices}
           />
 
-          {employeeWithServices.length <= 0 && (
+          {/* {employeeWithServices.length <= 0 && (
             <div className="flex justify-end">
               <button
                 onClick={handleServicesData}
@@ -60,9 +80,9 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
                 {loadingServicesData ? <LoadingIcon /> : "Continuar"}
               </button>
             </div>
-          )}
+          )} */}
 
-          {employeeWithServices.length > 0 && (
+          {/* {employeeWithServices.length > 0 && (
             <>
               <div>
                 <span>Qué servicios deseas:</span>
@@ -93,7 +113,7 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
                 {loadingCreateAppointment ? <LoadingIcon /> : "Crear cita"}
               </button>
             </>
-          )}
+            )} */}
         </form>
       </div>
     </section>

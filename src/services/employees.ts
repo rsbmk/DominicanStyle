@@ -1,36 +1,38 @@
-import { getEmployeeType, getEmployeeWithServicesType } from "@/types";
+import { getEmployeeType } from "@/types";
+import axios from "axios";
 
-const BASE_URI = import.meta.env.VITE_BASE_API_URL;
+const BASE_URL = import.meta.env.VITE_BASE_API_URL || 'http://localhost:8080/api/v1';
 
 export async function getEmployees(): Promise<getEmployeeType[]> {
   try {
-    const response = await fetch(`${BASE_URI}/v1/employee`);
+    const { data, status } = await axios.get(`${BASE_URL}/v1/employee`);
 
-    if (response.ok) {
-      return await response.json();
-    }
+    if (status === 200) return data as getEmployeeType[]
 
-    const error = await response.json();
-    console.error({ error });
-    throw error.message;
+    const error = { message: "Error fetching Employee data" }
+    throw error;
+
   } catch (error) {
-    console.error({ error });
+    if (axios.isAxiosError(error)) throw error.response
+
     throw error;
   }
 }
 
-export async function getOneEmployeeWithServices({ employeeId }: { employeeId: number }): Promise<getEmployeeWithServicesType[]> {
-  if (!employeeId) throw new Error("employeeId is required");
+// export async function getOneEmployeeWithServices({ employeeId }: { employeeId: number }): Promise<getEmployeeWithServicesType[]> {
+//   if (!employeeId) throw new Error("employeeId is required");
 
-  try {
-    const response = await fetch(`${BASE_URI}/v1/employee/${employeeId}/services`);
+//   try {
+//     const { data, status } = await axios.get(`${BASE_URL}/v1/employee/${employeeId}/services`);
 
-    if (response.ok) {
-      return await response.json();
-    }
-    throw await response.json();
-  } catch (error) {
-    console.error({ error });
-    throw error;
-  }
-}
+//     if (status === 200) return data as getEmployeeWithServicesType[]
+
+//     const error = { message: "Error fetching Employee data" }
+//     throw error;
+
+//   } catch (error) {
+//    if (axios.isAxiosError(error)) throw error.response
+
+//     throw error;
+//   }
+// }

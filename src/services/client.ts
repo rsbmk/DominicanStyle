@@ -9,12 +9,12 @@ export const searchClientData = async ({ clientId }: { clientId: string }) => {
 
     if (status === 200) return data as Client;
 
-    throw new Error("Error fetching client data");
+    const error = { message: "Error fetching client data" }
+    throw error;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw error.response;
     }
-    console.error("useClient ~ searchClientData ~ line 13", { error });
     throw error;
   }
 };
