@@ -3,7 +3,7 @@ import { ErrorMessage } from "@/components/errorMessage";
 import LoadingIcon from "@/icons/loading";
 
 type Props = {
-  handleOnChange: () => void;
+  handleOnChange: (employeeSelectedId: number) => void;
   name: string;
   messageError: string;
   inputHasError: string;
@@ -23,6 +23,11 @@ export function EmployeeSelect({
 }: Props) {
   const isEmptyOptionsList = loading === false && optionsList.length === 0;
 
+  const handleSelectEmployee: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
+    const employeeSelectedId = Number(evt.target.value);
+    handleOnChange(employeeSelectedId);
+  }
+
   return (
     <div>
       <label aria-label="employeeId" className="flex gap-2">
@@ -33,12 +38,12 @@ export function EmployeeSelect({
           <>
             {isEmptyOptionsList && <ErrorMessage message={"No hay empleados disponibles"} />}
             <select
-              onChange={handleOnChange}
+              onChange={handleSelectEmployee}
               name={name}
-              className="font-normal border-b-2 border-blue-300"
+              className="font-normal border-b-2 border-blue-300 focus-within:outline-blue-200"
               placeholder="Empleados"
             >
-              <option key="default" disabled defaultValue={"Empleados"}>
+              <option value="">
                 {isEmptyOptionsList ? "Sin opciones" : "Empleados"}
               </option>
               {optionsList.map((employee: Employee) => (

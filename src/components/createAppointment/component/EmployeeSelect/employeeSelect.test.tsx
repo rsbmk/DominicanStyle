@@ -25,12 +25,10 @@ describe('employee selector in create appointment from', () => {
   })
 
   it('should render the select list of employees', async () => {
-    const { getByPlaceholderText, getByText } = render(<EmployeeSelect labelTitle="" optionsList={employeesDataMock} loading={false} handleOnChange={() => null} inputHasError='' messageError="" name="" />)
+    const { getByPlaceholderText } = render(<EmployeeSelect labelTitle="" optionsList={employeesDataMock} loading={false} handleOnChange={() => null} inputHasError='' messageError="" name="" />)
     const selectEmployeeInput = getByPlaceholderText('Empleados') as HTMLSelectElement
-    await user.click(selectEmployeeInput)
 
-    const employeeSelection = getByText('Roberto')
-    await user.click(employeeSelection)
+    await user.selectOptions(selectEmployeeInput, '12')
 
     expect(selectEmployeeInput.value).toBe('12')
   })
