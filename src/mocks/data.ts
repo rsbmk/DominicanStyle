@@ -94,5 +94,44 @@ export const employeesDataMock: getEmployeeType[] = [
         },
       },
     ],
-  }
+  },
 ];
+
+export const appointmentDataMock = {
+  id: 14,
+  createAt: "2022-09-18T13:24:39.000Z",
+  appointmentDate: "2022-09-20T06:20:34.000Z",
+  state: "pending",
+  client_id: "1757646805",
+  employee_id: 13,
+  Client: {
+    cedula: "1757646805",
+    name: "Roberto",
+    last_name: "Melo",
+    telephone: "093569846",
+    createAt: "2022-08-20T17:58:06.000Z",
+  },
+  Employee: {
+    id: 13,
+    name: "Kerobe",
+    last_name: "Melo",
+    telephone: "0943234567",
+    createAt: "2022-09-11T13:42:49.000Z",
+    address: null,
+    company_id: 1,
+  },
+  Service_Appointment: [
+    {
+      id: 23,
+      service_id: 3,
+      appointment_id: 14,
+      Service: {
+        id: 3,
+        name: "Manicura",
+        createAt: "2022-08-20T13:05:47.000Z",
+        team_id: 2,
+        price: "6",
+      },
+    },
+  ],
+};

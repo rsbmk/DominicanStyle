@@ -1,33 +1,31 @@
+import axios from "axios";
 import { AppointmentCreateResponse, CreateAppointmentTypes } from "@/types";
+import { BASE_URL_MOCK } from "@/constants";
 
-const BASE_URI = import.meta.env.VITE_BASE_API_URL;
+const BASE_URI = import.meta.env.VITE_BASE_API_URL || BASE_URL_MOCK
 
 export type ErrorCreateAppointment = {
-  error: string
-  fields: string[]
-  message: string
-  nameInput: string
-  status: number
-}
+  error: string;
+  fields: string[];
+  message: string;
+  nameInput: string;
+  status: number;
+};
 
-export async function createAppointment({ appointment }: { appointment: CreateAppointmentTypes }):Promise<AppointmentCreateResponse> {
+export async function createAppointment({
+  appointment,
+}: {
+  appointment: CreateAppointmentTypes;
+}): Promise<AppointmentCreateResponse> {
   try {
-    const response = await fetch(`${BASE_URI}/v1/appointment`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(appointment),
-    });
+    const { data, status } = await axios.post(`${BASE_URI}/v1/appointment`, appointment);
 
-    if (response.ok) {
-      return await response.json();
-    }
+    if (status === 201) return data;
 
-    const error: Error = await response.json();
+    const error = { nameInput: "appointmentDate", message: "Error al crear la cita", error: data };
     throw error;
   } catch (error) {
-    console.error({ error });
+    if (axios.isAxiosError(error)) throw error.response;
     throw error;
   }
 }

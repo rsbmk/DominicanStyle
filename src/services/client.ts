@@ -1,7 +1,8 @@
 import axios from "axios";
 import { Client } from "@/types";
+import { BASE_URL_MOCK } from "@/constants";
 
-const BASE_URI = import.meta.env.VITE_BASE_API_URL ?? "http://localhost:8080/api";
+const BASE_URI = import.meta.env.VITE_BASE_API_URL || BASE_URL_MOCK
 
 export const searchClientData = async ({ clientId }: { clientId: string }) => {
   try {

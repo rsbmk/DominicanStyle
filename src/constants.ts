@@ -1,3 +1,5 @@
+export const BASE_URL_MOCK = 'http://localhost:8080/api/'
+
 export const resetErrors = {
   input: "",
   message: "",

@@ -4,7 +4,6 @@ import userEvent from "@testing-library/user-event";
 
 import { Client } from "@/types";
 import { server } from '@/mocks/server'
-import { clientDataMock } from "@/mocks/data";
 import { SearchClientForm } from "./SearchClientForm";
 
 const user = userEvent.setup()
