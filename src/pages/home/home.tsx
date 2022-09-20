@@ -47,7 +47,7 @@ export function Home() {
         </div>
       </header>
       <main className="grid gap-3 place-content-center">
-        <Link href="/appointment" className="font-medium button" aria-label="link to create appointment">
+        <Link href="/appointment/create" className="font-medium button" aria-label="link to create appointment">
           Agendar cita
           <DateIcon width={30} />
         </Link>
@@ -56,7 +56,7 @@ export function Home() {
         </div>
       </main>
       <footer className="flex justify-center w-full mt-8">
-        <Link href="/employee/login" className="text-primary-100 hover:underline">
+        <Link href="/login" className="text-primary-100 hover:underline">
           ¿Eres empleado? inicia sesión
         </Link>
       </footer>

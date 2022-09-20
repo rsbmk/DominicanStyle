@@ -17,13 +17,13 @@ describe("Page Home", () => {
     render(<Home />);
     const appointmentLink = screen.getByText('Agendar cita');
     await user.click(appointmentLink)
-    expect(window.location.pathname).toBe('/appointment')
+    expect(window.location.pathname).toBe('/appointment/create')
   })
 
   it('should navigate to employee login page', async () => {
-    render(<Home />);
-    const employeeLink = screen.getByText('¿Eres empleado? inicia sesión');
+    const { getByText } = render(<Home />);
+    const employeeLink = getByText('¿Eres empleado? inicia sesión');
     await user.click(employeeLink)
-    expect(window.location.pathname).toBe('/employee/login')
+    expect(window.location.pathname).toBe('/login')
   })
 });
