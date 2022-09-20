@@ -17,7 +17,7 @@ export function DateSelect({ name, messageError, inputHasError, placeholder = 'd
           defaultValue={undefined}
           type={"datetime-local"}
           name={name}
-          className="font-normal border-b-2 border-blue-300"
+          className="font-normal border-b-2 border-blue-300 focus-within:outline-blue-200"
         />
       </label>
       {inputHasError === name && <ErrorMessage message={messageError} />}

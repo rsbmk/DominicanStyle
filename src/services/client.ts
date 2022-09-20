@@ -19,3 +19,19 @@ export const searchClientData = async ({ clientId }: { clientId: string }) => {
     throw error;
   }
 };
+
+export const createClient = async ({ client }: { client: Client }) => {
+  try {
+    const { data, status } = await axios.post(`${BASE_URI}/v1/client`, client);
+
+    if (status === 201) return data as Client;
+
+    const error = { message: "Error creating client" }
+    throw error;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      throw error.response?.data;
+    }
+    throw error;
+  }
+}

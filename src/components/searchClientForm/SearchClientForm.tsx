@@ -41,7 +41,6 @@ export function SearchClientForm({
           input: nameInput,
           message: message,
         });
-        // console.error({ err });
       })
       .finally(() => setLoadingClientData(false));
   }, []);
