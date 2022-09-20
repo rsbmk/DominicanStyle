@@ -3,6 +3,7 @@ import { Route, Switch } from "wouter";
 
 const Appointment = lazy(() => import("@/pages/appointment"));
 const Home = lazy(() => import("@/pages/home"));
+const RegisterClient = lazy(() => import("@/pages/register"));
 
 function App() {
   return (
@@ -11,15 +12,15 @@ function App() {
         <Route path="/" component={Home} />
 
         {/* appointment */}
-        <Route path="/appointment" component={Appointment} />
+        <Route path="/appointment/create" component={Appointment} />
 
         {/* Client */}
         <Route path="/client/register">
-          <p> </p>
+          <RegisterClient />
         </Route>
 
         {/* Employee */}
-        <Route path="/employee/login">
+        <Route path="/login">
           <p>no he creado esta pagina</p>
         </Route>
         <Route>
