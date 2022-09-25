@@ -2,7 +2,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, afterEach, expect, beforeAll, afterAll } from "vitest";
 import { render, cleanup } from "@testing-library/react";
 import { server } from "@/mocks/server";
-
 import { RegisterClient } from "./client";
 
 const user = userEvent.setup();
