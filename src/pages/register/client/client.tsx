@@ -94,12 +94,12 @@ export const RegisterClient = () => {
   ];
 
   return (
-    <main>
+    <main className="grid gap-4">
       {clientCreated ? (
-        <>
+        <div>
           <h1>Gracias por registrar tus datos</h1>
           <Link href={LINKS_PAGES.createAppointment}>Agendar una cita</Link>
-        </>
+        </div>
       ) : (
         <>
           <div className="flex items-center justify-center mt-8 text-center">
