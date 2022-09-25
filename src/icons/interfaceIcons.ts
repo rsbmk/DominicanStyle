@@ -4,4 +4,6 @@ export interface props {
   fillColor?: string;
   stroke?: string;
   strokeWidth?: number;
+  opacity?: string | number;
+  className?: string;
 }

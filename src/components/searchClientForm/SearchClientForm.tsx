@@ -1,19 +1,15 @@
 import { Link } from "wouter";
 import { useCallback, useState } from "react";
 
-import { CalendarIlustraton } from "@/icons/DateSelectIlutration";
+import { CalendarIlustraton } from "@/icons/Ilutrations";
 import { Client } from "@/types";
 import { ErrorMessage } from "@/components/errorMessage";
-import { resetErrors } from "@/constants";
+import { LINKS_PAGES, resetErrors } from "@/constants";
 import { searchClientData } from "@/services/client";
 import { SearchIcon } from "@/icons/searchIcon";
-import LoadingIcon from "@/icons/loading";
+import { LoadingIcon } from "@/icons/loading";
 
-export function SearchClientForm({
-  setClientData = () => null,
-}: {
-  setClientData: (client: Client) => void;
-}) {
+export function SearchClientForm({ setClientData = () => null }: { setClientData: (client: Client) => void }) {
   const [showErrors, setShowErrors] = useState(resetErrors);
   const [loadingClientData, setLoadingClientData] = useState(false);
 
@@ -36,7 +32,7 @@ export function SearchClientForm({
         setClientData(client);
       })
       .catch((err) => {
-        const { nameInput = 'cedula', message = 'Error al buscar el cliente' } = err || {};
+        const { nameInput = "cedula", message = "Error al buscar el cliente" } = err || {};
         setShowErrors({
           input: nameInput,
           message: message,
@@ -57,10 +53,10 @@ export function SearchClientForm({
             type="text"
             placeholder="Ingresa tu número de cédula"
             required
-            className="w-56 border-b-2 border-opacity-50 focus:outline-none border-primary-100"
+            className="w-56 text-gray-500 border-b-2 border-opacity-50 focus:outline-none border-primary-100"
           />
         </label>
-        <button type={'submit'} aria-label="btn submit search user form" disabled={loadingClientData} className="button1 focus:outline-none">
+        <button type={"submit"} aria-label="btn submit search user form" disabled={loadingClientData} className="button1 focus:outline-none">
           {loadingClientData ? (
             <LoadingIcon />
           ) : (
@@ -76,10 +72,7 @@ export function SearchClientForm({
           <ErrorMessage message={showErrors.message} />
         </div>
       )}
-      <Link
-        href="/client/register"
-        className="grid justify-center mt-24 font-semibold text-center text-primary-100 hover:underline"
-      >
+      <Link href={LINKS_PAGES.registerClient} className="grid justify-center mt-24 font-semibold text-center text-primary-100 hover:underline">
         <span>¿Es primera vez que haces una cita?</span>
         <span>Registra tus datos</span>
       </Link>

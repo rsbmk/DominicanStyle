@@ -1,24 +1,9 @@
-type props = {
-  strokeWidth?: number;
-  stroke?: string;
-  opacity?: string;
-};
+import { props } from "./interfaceIcons";
 
-export default function LoadingIcon({
-  stroke = "currentColor",
-  strokeWidth = 4,
-  opacity = "opacity-25",
-}: props) {
+export function LoadingIcon({ stroke = "currentColor", strokeWidth = 4, className = "opacity-25" }: props) {
   return (
     <svg className="w-5 h-5 text-white animate-spin" fill="none" viewBox="0 0 24 24">
-      <circle
-        className={opacity}
-        cx="12"
-        cy="12"
-        r="10"
-        stroke={stroke}
-        strokeWidth={strokeWidth}
-      ></circle>
+      <circle className={className} cx="12" cy="12" r="10" stroke={stroke} strokeWidth={strokeWidth}></circle>
       <path
         className="opacity-75"
         fill="currentColor"

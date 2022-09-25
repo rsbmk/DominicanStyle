@@ -1,6 +1,6 @@
 import { Employee, getEmployeeType } from "@/types";
 import { ErrorMessage } from "@/components/errorMessage";
-import LoadingIcon from "@/icons/loading";
+import { LoadingIcon } from "@/icons/loading";
 
 type Props = {
   handleOnChange: (employeeSelectedId: number) => void;
@@ -12,21 +12,13 @@ type Props = {
   labelTitle: string;
 };
 
-export function EmployeeSelect({
-  handleOnChange,
-  name,
-  inputHasError,
-  messageError,
-  loading,
-  optionsList,
-  labelTitle,
-}: Props) {
+export function EmployeeSelect({ handleOnChange, name, inputHasError, messageError, loading, optionsList, labelTitle }: Props) {
   const isEmptyOptionsList = loading === false && optionsList.length === 0;
 
   const handleSelectEmployee: React.ChangeEventHandler<HTMLSelectElement> = (evt) => {
     const employeeSelectedId = Number(evt.target.value);
     handleOnChange(employeeSelectedId);
-  }
+  };
 
   return (
     <div>
@@ -43,9 +35,7 @@ export function EmployeeSelect({
               className="font-normal border-b-2 border-blue-300 focus-within:outline-blue-200"
               placeholder="Empleados"
             >
-              <option value="">
-                {isEmptyOptionsList ? "Sin opciones" : "Empleados"}
-              </option>
+              <option value="">{isEmptyOptionsList ? "Sin opciones" : "Empleados"}</option>
               {optionsList.map((employee: Employee) => (
                 <option key={employee.id} value={employee.id}>
                   {employee.name}

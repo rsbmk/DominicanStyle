@@ -4,7 +4,7 @@ import { AppointmentCreateResponse, Client } from "@/types";
 import { CreateAppointmentForm } from "@/components/createAppointment";
 import { searchClientData } from "@/services/client";
 import { SearchClientForm } from "@/components/searchClientForm";
-import LoadingIcon from "@/icons/loading";
+import { LoadingIcon } from "@/icons/loading";
 import { AppointmentInformation } from "@/components/createAppointment/component/infomation";
 
 export const titleAppointmentContex = createContext({});

@@ -5,7 +5,7 @@ import { CheckListServices } from "@/components/createAppointment/component/chec
 import { DateSelect } from "@/components/createAppointment/component/DateSelect";
 import { useAppointmentForm, inputsNames } from "@/components/createAppointment/hook/appointmentForm";
 import { useSelectEmployee, EmployeeSelect } from "@/components/createAppointment/component/EmployeeSelect";
-import LoadingIcon from "@/icons/loading";
+import { LoadingIcon } from "@/icons/loading";
 
 type Props = {
   clientData: Client;
@@ -15,11 +15,7 @@ type Props = {
 export function CreateAppointmentForm({ clientData, setAppointmentData }: Props) {
   const [employeeSelected, setEmployeeSelected] = useState<getEmployeeType | null>(null);
 
-  const {
-    handleCreateAppointment,
-    loadingCreateAppointment,
-    showErrors,
-  } = useAppointmentForm({ cedula: clientData.cedula, setAppointmentData });
+  const { handleCreateAppointment, loadingCreateAppointment, showErrors } = useAppointmentForm({ cedula: clientData.cedula, setAppointmentData });
 
   const { employeeList, loadingEmployeeList, handleSelectEmployee } = useSelectEmployee({ setEmployeeSelected });
 
@@ -32,16 +28,8 @@ export function CreateAppointmentForm({ clientData, setAppointmentData }: Props)
         </span>
       </h3>
 
-      <form
-        aria-label="create appointment form"
-        onSubmit={handleCreateAppointment}
-        className="grid gap-4 mx-3 mb-40 font-medium text-gray-600"
-      >
-        <DateSelect
-          inputHasError={showErrors.input}
-          messageError={showErrors.message}
-          name={inputsNames.date}
-        />
+      <form aria-label="create appointment form" onSubmit={handleCreateAppointment} className="grid gap-4 mx-3 mb-40 font-medium text-gray-600">
+        <DateSelect inputHasError={showErrors.input} messageError={showErrors.message} name={inputsNames.date} />
         <EmployeeSelect
           labelTitle="Algún empleado de preferencia:"
           loading={loadingEmployeeList}

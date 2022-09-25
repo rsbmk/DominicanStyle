@@ -1,9 +1,9 @@
-import { BookingIcon } from "@/icons/DateSelectIlutration";
+import { Link } from "wouter";
 import dayjs from "dayjs";
 
 import { AppointmentCreateResponse, Appointment_state, Client } from "@/types";
-import { appointmentState } from "@/constants";
-import { Link } from "wouter";
+import { appointmentState, LINKS_PAGES } from "@/constants";
+import { BookingIlustraton } from "@/icons/Ilutrations";
 
 type Props = {
   clientData: Client;
@@ -22,7 +22,7 @@ export function AppointmentInformation({ clientData, appointmentData }: Props) {
       </h3>
 
       <div className="grid w-full place-content-center">
-        <BookingIcon />
+        <BookingIlustraton />
       </div>
 
       <div>
@@ -100,7 +100,7 @@ export function AppointmentInformation({ clientData, appointmentData }: Props) {
       </div>
 
       <div className="grid w-full place-content-center">
-        <Link href="/" className="w-32 button">
+        <Link href={LINKS_PAGES.home} className="w-32 button">
           Inicio
         </Link>
       </div>
