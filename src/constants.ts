@@ -12,3 +12,10 @@ export const appointmentState = {
   close: "Cerrado",
   cancelled: "Cancelado"
 }
+
+export const LINKS_PAGES = {
+  home: "/",
+  login: "/login",
+  registerClient: "/client/register",
+  createAppointment: "/appointment/create",
+}

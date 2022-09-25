@@ -1,9 +1,10 @@
 import { Link } from "wouter";
 
 import { DateIcon } from "@/icons/date";
-import { DetePickerIlutration } from "@/icons/DateSelectIlutration";
+import { DetePickerIlutration } from "@/icons/Ilutrations";
 import { LocationIcon } from "@/icons/location";
 import { SocialMedia } from "@/components/socialMedia";
+import { LINKS_PAGES } from "@/constants";
 
 export function Home() {
   return (
@@ -47,7 +48,7 @@ export function Home() {
         </div>
       </header>
       <main className="grid gap-3 place-content-center">
-        <Link href="/appointment/create" className="font-medium button" aria-label="link to create appointment">
+        <Link href={LINKS_PAGES.createAppointment} className="font-medium button" aria-label="link to create appointment">
           Agendar cita
           <DateIcon width={30} />
         </Link>
@@ -56,7 +57,7 @@ export function Home() {
         </div>
       </main>
       <footer className="flex justify-center w-full mt-8">
-        <Link href="/login" className="text-primary-100 hover:underline">
+        <Link href={LINKS_PAGES.login} className="text-primary-100 hover:underline">
           ¿Eres empleado? inicia sesión
         </Link>
       </footer>
