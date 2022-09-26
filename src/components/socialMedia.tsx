@@ -2,7 +2,7 @@ import { FacebookIcon, InstagramIcon } from "@/icons/socials";
 
 export function SocialMedia() {
   return (
-    <aside className="flex justify-center gap-2 text-white">
+    <aside className="flex justify-center gap-2 font-semibold text-white">
       <a
         aria-label="Link a instagram"
         href="https://instagram.com/dominicanstyle.ec/"

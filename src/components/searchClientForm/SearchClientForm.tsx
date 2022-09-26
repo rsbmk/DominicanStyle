@@ -72,7 +72,7 @@ export function SearchClientForm({ setClientData = () => null }: { setClientData
           <ErrorMessage message={showErrors.message} />
         </div>
       )}
-      <Link href={LINKS_PAGES.registerClient} className="grid justify-center mt-24 font-semibold text-center text-primary-100 hover:underline">
+      <Link aria-label="link to register client" href={LINKS_PAGES.registerClient} className="grid justify-center mt-24 font-semibold text-center text-primary-100 hover:underline">
         <span>¿Es primera vez que haces una cita?</span>
         <span>Registra tus datos</span>
       </Link>

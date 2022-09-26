@@ -26,7 +26,7 @@ export function Home() {
             ></path>
           </svg>
           <div className="grid w-full gap-4 bg-primary-100 place-content-center">
-            <p className="text-2xl font-bold text-white">Las mejores manos profecionales</p>
+            <h1 aria-label="title" className="text-2xl font-bold text-white">Las mejores manos profecionales</h1>
             <SocialMedia />
             <a
               aria-label="link a google maps"
