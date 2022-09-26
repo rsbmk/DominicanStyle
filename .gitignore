@@ -31,3 +31,6 @@ dist-ssr
 .env.development
 .env.test
 .env.production
+/test-results/
+/playwright-report/
+/playwright/.cache/
