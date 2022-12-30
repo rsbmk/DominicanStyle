@@ -1,13 +1,13 @@
-import { lazy, Suspense } from "react";
-import { Route, Switch } from "wouter";
+import { lazy, Suspense } from 'react'
+import { Route, Switch } from 'wouter'
 
-import { LINKS_PAGES } from "./constants";
+import { LINKS_PAGES } from './constants'
 
-const Appointment = lazy(() => import("@/pages/appointment"));
-const Home = lazy(() => import("@/pages/home"));
-const RegisterClient = lazy(() => import("@/pages/register/client"));
+const Appointment = lazy(async () => await import('@/pages/appointment'))
+const Home = lazy(async () => await import('@/pages/home'))
+const RegisterClient = lazy(async () => await import('@/pages/register/client'))
 
-function App() {
+function App () {
   return (
     <Suspense fallback={null}>
       <Switch>
@@ -29,7 +29,7 @@ function App() {
         </Route>
       </Switch>
     </Suspense>
-  );
+  )
 }
 
-export default App;
+export default App

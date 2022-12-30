@@ -1,20 +1,20 @@
-import { Client, getEmployeeType } from "@/types";
+import { Client, getEmployeeType } from '@/types'
 
 export const clientDataMock: Client = {
-  cedula: "1757646805",
-  name: "Kerobe",
-  last_name: "Melo",
-  telephone: "093569846",
-  createAt: new Date("2022-08-20T17:58:06.000Z"),
-};
+  cedula: '1757646805',
+  name: 'Kerobe',
+  last_name: 'Melo',
+  telephone: '093569846',
+  createAt: new Date('2022-08-20T17:58:06.000Z')
+}
 
 export const employeesDataMock: getEmployeeType[] = [
   {
     id: 12,
-    name: "Roberto",
-    last_name: "Bocio",
-    telephone: "0987654321",
-    createAt: new Date("2022-08-14T16:26:57.000Z"),
+    name: 'Roberto',
+    last_name: 'Bocio',
+    telephone: '0987654321',
+    createAt: new Date('2022-08-14T16:26:57.000Z'),
     address: null,
     company_id: 1,
     Employee_Team: [
@@ -24,25 +24,25 @@ export const employeesDataMock: getEmployeeType[] = [
         employee_id: 12,
         Team: {
           id: 1,
-          name: "Barberia",
-          createAt: new Date("2022-08-14T02:02:56.000Z"),
+          name: 'Barberia',
+          createAt: new Date('2022-08-14T02:02:56.000Z'),
           Service: [
             {
               id: 1,
-              name: "Corte",
-              createAt: new Date("2022-08-20T12:55:48.000Z"),
+              name: 'Corte',
+              createAt: new Date('2022-08-20T12:55:48.000Z'),
               team_id: 1,
-              price: 10,
+              price: 10
             },
             {
               id: 2,
-              name: "Barba",
-              createAt: new Date("2022-08-20T13:04:36.000Z"),
+              name: 'Barba',
+              createAt: new Date('2022-08-20T13:04:36.000Z'),
               team_id: 1,
-              price: 5,
-            },
-          ],
-        },
+              price: 5
+            }
+          ]
+        }
       },
       {
         id: 3,
@@ -50,27 +50,27 @@ export const employeesDataMock: getEmployeeType[] = [
         employee_id: 12,
         Team: {
           id: 2,
-          name: "Manicurista",
-          createAt: new Date("2022-08-14T02:04:52.000Z"),
+          name: 'Manicurista',
+          createAt: new Date('2022-08-14T02:04:52.000Z'),
           Service: [
             {
               id: 3,
-              name: "Manicura",
-              createAt: new Date("2022-08-20T13:05:47.000Z"),
+              name: 'Manicura',
+              createAt: new Date('2022-08-20T13:05:47.000Z'),
               team_id: 2,
-              price: 6,
-            },
-          ],
-        },
-      },
-    ],
+              price: 6
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     id: 13,
-    name: "Kerobe",
-    last_name: "Melo",
-    telephone: "0943234567",
-    createAt: new Date("2022-09-11T13:42:49.000Z"),
+    name: 'Kerobe',
+    last_name: 'Melo',
+    telephone: '0943234567',
+    createAt: new Date('2022-09-11T13:42:49.000Z'),
     address: null,
     company_id: 1,
     Employee_Team: [
@@ -80,45 +80,45 @@ export const employeesDataMock: getEmployeeType[] = [
         employee_id: 13,
         Team: {
           id: 2,
-          name: "Manicurista",
-          createAt: new Date("2022-08-14T02:04:52.000Z"),
+          name: 'Manicurista',
+          createAt: new Date('2022-08-14T02:04:52.000Z'),
           Service: [
             {
               id: 3,
-              name: "Manicura",
-              createAt: new Date("2022-08-20T13:05:47.000Z"),
+              name: 'Manicura',
+              createAt: new Date('2022-08-20T13:05:47.000Z'),
               team_id: 2,
-              price: 6,
-            },
-          ],
-        },
-      },
-    ],
-  },
-];
+              price: 6
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
 
 export const appointmentDataMock = {
   id: 14,
-  createAt: "2022-09-18T13:24:39.000Z",
-  appointmentDate: "2022-09-20T06:20:34.000Z",
-  state: "pending",
-  client_id: "1757646805",
+  createAt: '2022-09-18T13:24:39.000Z',
+  appointmentDate: '2022-09-20T06:20:34.000Z',
+  state: 'pending',
+  client_id: '1757646805',
   employee_id: 13,
   Client: {
-    cedula: "1757646805",
-    name: "Roberto",
-    last_name: "Melo",
-    telephone: "093569846",
-    createAt: "2022-08-20T17:58:06.000Z",
+    cedula: '1757646805',
+    name: 'Roberto',
+    last_name: 'Melo',
+    telephone: '093569846',
+    createAt: '2022-08-20T17:58:06.000Z'
   },
   Employee: {
     id: 13,
-    name: "Kerobe",
-    last_name: "Melo",
-    telephone: "0943234567",
-    createAt: "2022-09-11T13:42:49.000Z",
+    name: 'Kerobe',
+    last_name: 'Melo',
+    telephone: '0943234567',
+    createAt: '2022-09-11T13:42:49.000Z',
     address: null,
-    company_id: 1,
+    company_id: 1
   },
   Service_Appointment: [
     {
@@ -127,11 +127,11 @@ export const appointmentDataMock = {
       appointment_id: 14,
       Service: {
         id: 3,
-        name: "Manicura",
-        createAt: "2022-08-20T13:05:47.000Z",
+        name: 'Manicura',
+        createAt: '2022-08-20T13:05:47.000Z',
         team_id: 2,
-        price: "6",
-      },
-    },
-  ],
-};
+        price: '6'
+      }
+    }
+  ]
+}

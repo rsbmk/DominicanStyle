@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { isEmpty } from "./isEmpty";
+import { describe, expect, it } from 'vitest'
+import { isEmpty } from './isEmpty'
 
 describe('isEmpty util function', () => {
   it('returns true for empty string', () => {
@@ -32,12 +32,11 @@ describe('isEmpty util function', () => {
   })
 
   it('return false for non-empty array', () => {
-    expect(isEmpty([1, "hol"])).toBe(false)
+    expect(isEmpty([1, 'hol'])).toBe(false)
   })
 
   it('return the value of boolean', () => {
     expect(isEmpty(true)).toBe(false)
     expect(isEmpty(false)).toBe(true)
   })
-
 })

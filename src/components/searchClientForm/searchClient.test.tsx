@@ -1,10 +1,10 @@
-import { cleanup, render, screen } from "@testing-library/react";
-import { describe, it, afterEach, expect, vi, beforeAll, afterAll } from "vitest";
-import userEvent from "@testing-library/user-event";
+import { cleanup, render, screen } from '@testing-library/react'
+import { describe, it, afterEach, expect, vi, beforeAll, afterAll } from 'vitest'
+import userEvent from '@testing-library/user-event'
 
-import { Client } from "@/types";
+import { Client } from '@/types'
 import { server } from '@/mocks/server'
-import { SearchClientForm } from "./SearchClientForm";
+import { SearchClientForm } from './SearchClientForm'
 
 const user = userEvent.setup()
 
@@ -23,11 +23,11 @@ describe('search client form', () => {
   it('should render and catch the titile', () => {
     render(<SearchClientForm setClientData={() => null} />)
     screen.getByLabelText('calendar illustration')
-  });
+  })
 
   it('should write in the input', async () => {
     render(<SearchClientForm setClientData={() => null} />)
-    const input = screen.getByPlaceholderText('Ingresa tu número de cédula') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Ingresa tu número de cédula')
     expect(input.value).toBe('')
 
     await user.type(input, '1234567890')
@@ -36,7 +36,7 @@ describe('search client form', () => {
 
   it('should show error if the cedula not is valid', async () => {
     render(<SearchClientForm setClientData={() => null} />)
-    const input = screen.getByPlaceholderText('Ingresa tu número de cédula') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Ingresa tu número de cédula')
     await user.type(input, '1234567')
     await user.click(screen.getByRole('button'))
 
@@ -45,7 +45,7 @@ describe('search client form', () => {
 
   it('should send a valid cedula and show the client data', async () => {
     render(<SearchClientForm setClientData={handleSearchData} />)
-    const input = screen.getByPlaceholderText('Ingresa tu número de cédula') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Ingresa tu número de cédula')
     await user.type(input, '1757646805')
 
     const btnSubmit = screen.getByLabelText('btn submit search user form')
@@ -57,7 +57,7 @@ describe('search client form', () => {
 
   it('should show error if the client is not fund', async () => {
     render(<SearchClientForm setClientData={() => null} />)
-    const input = screen.getByPlaceholderText('Ingresa tu número de cédula') as HTMLInputElement
+    const input = screen.getByPlaceholderText('Ingresa tu número de cédula')
     await user.type(input, '1234567890')
 
     const btnSubmit = screen.getByLabelText('btn submit search user form')
@@ -72,6 +72,5 @@ describe('search client form', () => {
     await user.click(link)
 
     expect(window.location.pathname).toBe('/client/register')
-
   })
 })

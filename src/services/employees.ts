@@ -1,22 +1,20 @@
-import { BASE_URL_MOCK } from "@/constants";
-import { getEmployeeType } from "@/types";
-import axios from "axios";
+import { BASE_URL_MOCK } from '@/constants'
+import { getEmployeeType } from '@/types'
+import axios from 'axios'
 
-const BASE_URL = import.meta.env.VITE_BASE_API_URL || BASE_URL_MOCK
+const BASE_URL: string = import.meta.env.VITE_BASE_API_URL ?? BASE_URL_MOCK
 
 export async function getEmployees(): Promise<getEmployeeType[]> {
   try {
-    const { data, status } = await axios.get(`${BASE_URL}/v1/employee`);
+    const { data, status } = await axios.get(`${BASE_URL}/v1/employee`)
 
     if (status === 200) return data as getEmployeeType[]
 
-    const error = { message: "Error fetching Employee data" }
-    throw error;
-
+    throw new Error('Error fetching Employee data')
   } catch (error) {
-    if (axios.isAxiosError(error)) throw error.response
+    if (axios.isAxiosError(error)) throw new Error(error ?? 'Error fetching Employee data')
 
-    throw error;
+    throw error
   }
 }
 

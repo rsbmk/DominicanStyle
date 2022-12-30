@@ -33,14 +33,26 @@
     "postcss": "8.4.16",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "3.1.8",
+    "ts-standard": "^12.0.1",
     "typescript": "4.8.3",
     "vite": "3.1.2",
     "vitest": "0.23.4"
   },
-  "ts-standard": {
-    "project": "/tsconfig.json"
-  },
   "msw": {
     "workerDirectory": "public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "./node_modules/ts-standard/eslintrc.json"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "plugins": [
+      "@typescript-eslint"
+    ],
+    "rules": {
+      "@typescript-eslint/explicit-function-return-type": "off"
+    }
   }
 }

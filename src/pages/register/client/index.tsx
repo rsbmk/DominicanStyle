@@ -1,2 +1,2 @@
-import { RegisterClient } from "./client";
-export default RegisterClient;
+import { RegisterClient } from './client'
+export default RegisterClient
